@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NetworkJson</string>
+
+    <string-array name="metodos_array">
+        <item>POST</item>
+        <item>GET</item>
+        <item>UPDATE</item>
+        <item>DELETE</item>
+    </string-array>
+
+</resources>
