@@ -62,15 +62,19 @@ public class DownloadTask extends AsyncTask<String, Integer, Result> {
     }
 
     @Override
-    protected Result doInBackground( String... urls ){
+    protected Result doInBackground( String... parametros ){
         Result result = null;
 
-        if( !isCancelled() && urls != null && urls.length > 0 ){
-            String urlString = urls[0];
+        if( !isCancelled() && parametros != null && parametros.length > 0 ){
+            String urlString = parametros[0];
+            String metodo = "GET";
+            if( parametros.length > 1 ){
+                metodo = parametros[1];
+            }
 
             try{
                 URL url = new URL(urlString);
-                String resultString = downloadUrl(url);
+                String resultString = downloadUrl(url, metodo);
 
                 if( resultString != null ){
                     result = new Result( resultString );
@@ -102,7 +106,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Result> {
 
     }
 
-    private String downloadUrl( URL url ) throws IOException {
+    private String downloadUrl( URL url, String metodo) throws IOException {
         InputStream stream = null;
         HttpURLConnection connection = null;
         String result = null;
@@ -110,7 +114,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Result> {
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(3000);
             connection.setConnectTimeout(3000);
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod(metodo);
             connection.setDoInput( true );
 
             connection.connect();

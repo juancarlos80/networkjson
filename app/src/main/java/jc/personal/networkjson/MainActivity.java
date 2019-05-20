@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements DownloadRetorno<S
 
     public void obtener_url(View btn){
         downloadTask = new DownloadTask( retorno );
-        downloadTask.execute( edi_url.getText().toString() );
+        downloadTask.execute( edi_url.getText().toString(), spi_metodo.getSelectedItem().toString() );
     }
 
     @Override
